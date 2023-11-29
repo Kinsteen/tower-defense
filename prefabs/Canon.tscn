@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://1pw5tb10ntdh"]
+
+[ext_resource type="Texture2D" uid="uid://x2giw2kavaqu" path="res://textures/props.png" id="1_bss6j"]
+[ext_resource type="Script" path="res://prefabs/Canon.gd" id="1_by30s"]
+
+[node name="Canon" type="Node2D"]
+script = ExtResource("1_by30s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bss6j")
+region_enabled = true
+region_rect = Rect2(162, 153, 28, 36)
+
+[connection signal="state_changed" from="." to="." method="_on_state_changed"]
