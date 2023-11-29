@@ -22,19 +22,23 @@ func _ready():
 func _process(delta):
 	pass
 
+# This is triggered everywhere everytime?
 func _input(event):
 	if event is InputEventMouseMotion and state == State.MOVING:
 		var snap := 16*3
 		var offset := 16 + 16/2
-		self.position = Vector2(int(event.position.x / snap) * snap + offset, int(event.position.y / snap) * snap - offset)
-	elif event is InputEventMouseButton and event.is_pressed():
+		self.position = Vector2(int(event.position.x / snap) * snap + offset, int(event.position.y / snap) * snap)
+
+func _on_state_changed(old, new):
+	if new == State.MOVING:
+		$Area2D/Sprite2D.set_modulate(Color(1, 1, 1, 0.3))
+	elif new == State.IDLE:
+		$Area2D/Sprite2D.set_modulate(Color(1, 1, 1, 1))
+
+# This is only when clicking in the collision shape
+func _on_area_2d_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.is_pressed():
 		if state == State.MOVING:
 			state = State.IDLE
 		elif state == State.IDLE:
 			state = State.MOVING
-
-func _on_state_changed(old, new):
-	if new == State.MOVING:
-		$Sprite2D.set_modulate(Color(1, 1, 1, 0.5))
-	elif new == State.IDLE:
-		$Sprite2D.set_modulate(Color(1, 1, 1, 1))

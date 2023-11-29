@@ -1,14 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://1pw5tb10ntdh"]
+[gd_scene load_steps=4 format=3 uid="uid://1pw5tb10ntdh"]
 
 [ext_resource type="Texture2D" uid="uid://x2giw2kavaqu" path="res://textures/props.png" id="1_bss6j"]
 [ext_resource type="Script" path="res://prefabs/Canon.gd" id="1_by30s"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jypwi"]
+size = Vector2(28, 36)
+
 [node name="Canon" type="Node2D"]
 script = ExtResource("1_by30s")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
 texture = ExtResource("1_bss6j")
 region_enabled = true
 region_rect = Rect2(162, 153, 28, 36)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_jypwi")
+
 [connection signal="state_changed" from="." to="." method="_on_state_changed"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
