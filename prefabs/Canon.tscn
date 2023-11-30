@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jypwi"]
 size = Vector2(28, 36)
 
-[node name="Canon" type="Node2D"]
+[node name="Canon" type="Node2D" groups=["building"]]
 script = ExtResource("1_by30s")
 
 [node name="Area2D" type="Area2D" parent="."]
