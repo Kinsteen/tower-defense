@@ -6,6 +6,9 @@ enum State {
 	# Could create more state here, like attacking, broken maybe?
 }
 
+# This is necessary because the object doesn't have the context of other nodes
+# This way, the GameScene can change this and add more logic. It avoids
+# bottom -> up dependency, making the code reusable more easily
 var can_place: Callable = func (this: Building):
 	return true
 
@@ -22,7 +25,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not can_place.call(self):
-		$Area2D/Sprite2D.set_modulate(Color(1, .5, .5, 0.8))
+		$Sprite2D.set_modulate(Color(1, .5, .5, 0.8))
 	else:
 		self._on_state_changed(state, state)
 
@@ -36,18 +39,22 @@ func _input(event):
 			int(event.position.y / snap) * snap
 		)
 	if event is InputEventMouseButton and event.is_pressed():
-		if state == State.MOVING and can_place.call(self):
-			state = State.IDLE
-			get_viewport().set_input_as_handled() # Stop propagating the event
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if state == State.MOVING and can_place.call(self):
+				state = State.IDLE
+				get_viewport().set_input_as_handled() # Stop propagating the event
 
 func _on_state_changed(old, new):
 	if new == State.MOVING:
-		$Area2D/Sprite2D.set_modulate(Color(1, 1, 1, 0.3))
+		$Sprite2D.set_modulate(Color(1, 1, 1, 0.3))
 	elif new == State.IDLE:
-		$Area2D/Sprite2D.set_modulate(Color(1, 1, 1, 1))
+		$Sprite2D.set_modulate(Color(1, 1, 1, 1))
 
 # This is only when clicking in the collision shape
 func _on_area_2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():
-		if state == State.IDLE and can_place.call(self): # TODO dirty, should remember when we're moving something?
-			state = State.MOVING
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if state == State.IDLE and can_place.call(self): # TODO dirty, should remember when we're moving something?
+				state = State.MOVING
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			print("Something else...")
