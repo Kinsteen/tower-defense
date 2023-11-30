@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cstbxmgrc0bhe"]
+
+[ext_resource type="PackedScene" uid="uid://bfoo1xws3rdfg" path="res://scenes/GameScene.tscn" id="1_nrqe5"]
+
+[node name="Main" type="Node"]
+
+[node name="GameScene" parent="." instance=ExtResource("1_nrqe5")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 94.0
+offset_bottom = 40.0
+text = "Add thing"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="GameScene" method="_on_button_pressed"]
