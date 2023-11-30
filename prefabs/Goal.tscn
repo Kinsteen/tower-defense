@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddo2s6nh4ew1y"]
+
+[ext_resource type="Texture2D" uid="uid://x2giw2kavaqu" path="res://textures/props.png" id="1_s6wpo"]
+[ext_resource type="Script" path="res://prefabs/Goal.gd" id="1_udxki"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lrmpt"]
+radius = 38.0132
+
+[node name="Goal" type="StaticBody2D"]
+script = ExtResource("1_udxki")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_s6wpo")
+region_enabled = true
+region_rect = Rect2(352, 264, 96, 80)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lrmpt")
