@@ -1,4 +1,6 @@
-extends Button
+extends Node2D
+
+var canon := preload("res://prefabs/Canon.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,8 +12,7 @@ func _process(delta):
 	pass
 
 
-func _on_pressed():
-	var canon := preload("res://prefabs/Canon.tscn").instantiate()
-	canon.set_scale(Vector2(2, 2))
-	$/root/GameScene.add_child(canon)
-	pass # Replace with function body.
+func _on_button_pressed():
+	var canon_inst = canon.instantiate()
+	canon_inst.set_scale(Vector2(2, 2))
+	self.add_child(canon_inst)

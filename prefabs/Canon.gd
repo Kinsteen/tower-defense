@@ -8,8 +8,6 @@ enum State {
 
 signal state_changed(old: State, new: State)
 var state: State:
-	get:
-		return state
 	set(new_state):
 		state_changed.emit(state, new_state)
 		state = new_state
@@ -27,7 +25,14 @@ func _input(event):
 	if event is InputEventMouseMotion and state == State.MOVING:
 		var snap := 16*3
 		var offset := 16 + 16/2
-		self.position = Vector2(int(event.position.x / snap) * snap + offset, int(event.position.y / snap) * snap)
+		self.position = Vector2(
+			int(event.position.x / snap) * snap + offset,
+			int(event.position.y / snap) * snap
+		)
+	if event is InputEventMouseButton and event.is_pressed():
+		if state == State.MOVING:
+			state = State.IDLE
+			get_viewport().set_input_as_handled() # Stop propagating the event
 
 func _on_state_changed(old, new):
 	if new == State.MOVING:
@@ -38,7 +43,5 @@ func _on_state_changed(old, new):
 # This is only when clicking in the collision shape
 func _on_area_2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.is_pressed():
-		if state == State.MOVING:
-			state = State.IDLE
-		elif state == State.IDLE:
+		if state == State.IDLE:
 			state = State.MOVING

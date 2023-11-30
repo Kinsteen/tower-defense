@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bfoo1xws3rdfg"]
 
+[ext_resource type="Script" path="res://scenes/GameScene.gd" id="1_ka14l"]
 [ext_resource type="TileSet" uid="uid://cia0akvspfnce" path="res://tilesets/ground.tres" id="1_r86nc"]
-[ext_resource type="Script" path="res://scripts/AddBlock.gd" id="2_ka4j6"]
 
 [node name="GameScene" type="Node2D"]
+script = ExtResource("1_ka14l")
 
 [node name="GroundTiles" type="TileMap" parent="."]
 scale = Vector2(3, 3)
@@ -17,6 +18,5 @@ offset_top = 9.0
 offset_right = 65.0
 offset_bottom = 24.0
 text = "Add thing"
-script = ExtResource("2_ka4j6")
 
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
