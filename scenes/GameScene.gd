@@ -19,4 +19,5 @@ func _create_canon():
 			if node != this and node.position == this.position:
 				return false
 		return true
+	canon_inst.position = get_global_mouse_position()
 	self.add_child(canon_inst)

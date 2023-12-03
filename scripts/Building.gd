@@ -36,14 +36,14 @@ func _input(event):
 		var snap := 16 * 3
 		var offset := 8 * 3
 		self.position = Vector2(
-			int(event.position.x / snap) * snap + offset,
-			int(event.position.y / snap) * snap
+			int(get_global_mouse_position().x / snap) * snap + offset,
+			int(get_global_mouse_position().y / snap) * snap
 		)
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if state == State.MOVING and can_place.call(self):
 				state = State.IDLE
-		elif event.button_index == MOUSE_BUTTON_RIGHT and is_in_rect($Sprite2D, event.position):
+		elif event.button_index == MOUSE_BUTTON_RIGHT and is_in_rect($Sprite2D, get_global_mouse_position()):
 			if state == State.IDLE:
 				GuiEvents.show_building_popup.emit(self, to_global(event.position))
 
