@@ -8,9 +8,9 @@ const BUILDING_POPUP = preload("res://scenes/BuildingPopup.tscn")
 func _ready():
 	assert(parent != null)
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
-		if not self.has_point(event.position):
+		if not self.has_point(get_global_mouse_position()):
 			self.queue_free()
 
 func has_point(point: Vector2) -> bool:
