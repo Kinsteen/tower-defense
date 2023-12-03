@@ -12,14 +12,15 @@ func _ready():
 func _process(delta):
 	pass
 
+func _can_place(building: Building):
+	for node in get_tree().get_nodes_in_group("building"):
+		if node != building and node.position == building.position:
+			return false
+	return true
 
 func _create_canon():
 	var canon_inst = canon.instantiate()
-	canon_inst.can_place = func (this):
-		for node in get_tree().get_nodes_in_group("building"):
-			if node != this and node.position == this.position:
-				return false
-		return true
+	canon_inst.can_place = _can_place
 	canon_inst.position = get_global_mouse_position()
 	canon_inst.add_child(BUILDING_HEALTH.instantiate())
 	self.add_child(canon_inst)
