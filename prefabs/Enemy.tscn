@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dku4urhn2t2fr"]
+[gd_scene load_steps=5 format=3 uid="uid://0svqt5yqvdk3"]
 
 [ext_resource type="Script" path="res://prefabs/Enemy.gd" id="1_70tlf"]
 [ext_resource type="Texture2D" uid="uid://x2giw2kavaqu" path="res://textures/props.png" id="1_bpimn"]
