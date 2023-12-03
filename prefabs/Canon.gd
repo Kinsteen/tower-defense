@@ -35,7 +35,7 @@ func _physics_process(delta):
 
 	if target != null:
 		var angle_left = $Gun.get_angle_to(target.global_position) # Why global?
-		angle_left = max(min(angle_left, deg_to_rad(rotate_speed_deg) * delta), -deg_to_rad(rotate_speed_deg) * delta)
+		angle_left = sign(angle_left) * min(abs(angle_left), deg_to_rad(rotate_speed_deg) * delta)
 		$Gun.rotate(angle_left)
 		_lock_on_target = abs(angle_left) < deg_to_rad(rotate_speed_deg) * delta
 	else:
