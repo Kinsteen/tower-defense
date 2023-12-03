@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://du74pr5a0rqm"]
+
+[ext_resource type="Texture2D" uid="uid://x2giw2kavaqu" path="res://textures/props.png" id="1_mljlm"]
+[ext_resource type="Script" path="res://prefabs/EnemySpawner.gd" id="2_irint"]
+
+[node name="EnemySpawner" type="Sprite2D"]
+texture = ExtResource("1_mljlm")
+region_enabled = true
+region_rect = Rect2(440, 16, 48, 80)
+script = ExtResource("2_irint")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

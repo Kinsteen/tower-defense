@@ -2,15 +2,16 @@ extends CharacterBody2D
 
 @export var HP : int = 30
 @export var DAMAGE : int = 10
-@export var goal : Node2D = null
+@export var GOAL : Node2D = null
+@export var SPEED : int = 50
 
 func _ready():
-	assert(goal != null)
+	assert(GOAL != null)
 
 func _physics_process(delta):
-	if goal:
-		var target = goal.position
-		var new_position = position.move_toward(target, 500)
+	if GOAL:
+		var target = GOAL.position
+		var new_position = position.move_toward(target, SPEED)
 		velocity = new_position - position
 	else:
 		velocity.x = 0
@@ -23,6 +24,6 @@ func take_damage(amount):
 		queue_free()
 
 func _on_area_2d_body_entered(body):
-	if body.has_method("take_damage") and body == goal:
+	if body.has_method("take_damage") and body == GOAL:
 		body.take_damage(DAMAGE)
 		queue_free()
