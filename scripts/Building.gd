@@ -28,7 +28,7 @@ func _ready():
 func _process(delta):
 	if can_place != null:
 		if not can_place.call(self):
-			$Sprite2D.set_modulate(Color(1, .5, .5, 0.8))
+			self.set_modulate(Color(1, .5, .5, 0.8))
 		else:
 			self._on_state_changed(state, state)
 
@@ -45,16 +45,16 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if state == State.MOVING and can_place.call(self):
 				state = State.IDLE
-		elif event.button_index == MOUSE_BUTTON_RIGHT and is_in_rect($Sprite2D, get_global_mouse_position()):
+		elif event.button_index == MOUSE_BUTTON_RIGHT and is_in_rect($Base, get_global_mouse_position()):
 			if state == State.IDLE:
 				BuildingPopup.create_popup(self)
 
 
 func _on_state_changed(old, new):
 	if new == State.MOVING:
-		$Sprite2D.set_modulate(Color(1, 1, 1, 0.3))
+		self.set_modulate(Color(1, 1, 1, 0.3))
 	elif new == State.IDLE:
-		$Sprite2D.set_modulate(Color(1, 1, 1, 1))
+		self.set_modulate(Color(1, 1, 1, 1))
 
 func is_in_rect(sprite: Sprite2D, position: Vector2):
 	return sprite.get_rect().has_point(to_local(position) / Vector2(sprite.scale.x, sprite.scale.y))

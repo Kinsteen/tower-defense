@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Enemy extends CharacterBody2D
 
 @export var HP : int = 30
 @export var DAMAGE : int = 10
@@ -24,6 +24,10 @@ func take_damage(amount):
 		queue_free()
 
 func _on_area_2d_body_entered(body):
+	if body is Bullet:
+		self.take_damage(10)
+		body.queue_free()
+
 	if body.has_method("take_damage") and body == GOAL:
 		body.take_damage(DAMAGE)
 		queue_free()
