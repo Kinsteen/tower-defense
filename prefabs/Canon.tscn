@@ -9,6 +9,7 @@ radius = 350.0
 
 [node name="Canon" type="Node2D" groups=["building"]]
 script = ExtResource("1_by30s")
+rotate_speed_deg = 60.0
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -29,7 +30,4 @@ offset = Vector2(0, 0.5)
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="state_changed" from="." to="." method="_on_state_changed"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

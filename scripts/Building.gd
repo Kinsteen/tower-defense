@@ -14,10 +14,13 @@ enum State {
 var can_place: Callable = func (this: Building):
 	return true
 
+# Could be used by children classes, with self.state_changed.connect(f)
 signal state_changed(old: State, new: State)
 var state: State:
 	set(new_state):
-		state_changed.emit(state, new_state)
+		if state != new_state:
+			state_changed.emit(state, new_state)
+			self._on_state_changed(state, new_state)
 		state = new_state
 
 # Called when the node enters the scene tree for the first time.
@@ -29,8 +32,6 @@ func _process(delta):
 	if can_place != null:
 		if not can_place.call(self):
 			self.set_modulate(Color(1, .5, .5, 0.8))
-		else:
-			self._on_state_changed(state, state)
 
 # This is triggered everywhere everytime?
 func _input(event):
@@ -49,11 +50,12 @@ func _input(event):
 			if state == State.IDLE:
 				BuildingPopup.create_popup(self)
 
-
 func _on_state_changed(old, new):
 	if new == State.MOVING:
+		set_physics_process(false)
 		self.set_modulate(Color(1, 1, 1, 0.3))
 	elif new == State.IDLE:
+		set_physics_process(true)
 		self.set_modulate(Color(1, 1, 1, 1))
 
 func is_in_rect(sprite: Sprite2D, position: Vector2):
