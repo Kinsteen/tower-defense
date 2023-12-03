@@ -24,16 +24,17 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if not can_place.call(self):
-		$Sprite2D.set_modulate(Color(1, .5, .5, 0.8))
-	else:
-		self._on_state_changed(state, state)
+	if can_place != null:
+		if not can_place.call(self):
+			$Sprite2D.set_modulate(Color(1, .5, .5, 0.8))
+		else:
+			self._on_state_changed(state, state)
 
 # This is triggered everywhere everytime?
 func _input(event):
 	if event is InputEventMouseMotion and state == State.MOVING:
-		var snap := 16*3
-		var offset := 16 + 16/2
+		var snap := 16 * 3
+		var offset := 8 * 3
 		self.position = Vector2(
 			int(event.position.x / snap) * snap + offset,
 			int(event.position.y / snap) * snap
@@ -42,7 +43,9 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if state == State.MOVING and can_place.call(self):
 				state = State.IDLE
-				get_viewport().set_input_as_handled() # Stop propagating the event
+		elif event.button_index == MOUSE_BUTTON_RIGHT and is_in_rect($Sprite2D, event.position):
+			if state == State.IDLE:
+				GuiEvents.show_building_popup.emit(self, to_global(event.position))
 
 func _on_state_changed(old, new):
 	if new == State.MOVING:
@@ -50,11 +53,5 @@ func _on_state_changed(old, new):
 	elif new == State.IDLE:
 		$Sprite2D.set_modulate(Color(1, 1, 1, 1))
 
-# This is only when clicking in the collision shape
-func _on_area_2d_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.is_pressed():
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if state == State.IDLE and can_place.call(self): # TODO dirty, should remember when we're moving something?
-				state = State.MOVING
-		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			print("Something else...")
+func is_in_rect(sprite: Sprite2D, position: Vector2):
+	return sprite.get_rect().has_point(to_local(position) / Vector2(sprite.scale.x, sprite.scale.y))

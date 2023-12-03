@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkijakqddxwui"]
+
+[ext_resource type="Script" path="res://scenes/BuildingPopup.gd" id="1_sl8fw"]
+
+[node name="BuildingPopup" type="Control" groups=["building_popup"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sl8fw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Pickup" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Pickup"
+
+[node name="Delete" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Delete
+"
+
+[connection signal="pressed" from="VBoxContainer/Pickup" to="." method="_on_pickup_pressed"]
+[connection signal="pressed" from="VBoxContainer/Delete" to="." method="_on_delete_pressed"]
