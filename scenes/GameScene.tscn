@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/GameScene.gd" id="1_ka14l"]
 [ext_resource type="TileSet" uid="uid://cia0akvspfnce" path="res://tilesets/ground.tres" id="1_r86nc"]
 [ext_resource type="PackedScene" uid="uid://0svqt5yqvdk3" path="res://prefabs/Enemy.tscn" id="3_5vjwr"]
-[ext_resource type="PackedScene" path="res://prefabs/Goal.tscn" id="3_qi0w6"]
+[ext_resource type="PackedScene" uid="uid://ddo2s6nh4ew1y" path="res://prefabs/Goal.tscn" id="3_qi0w6"]
 [ext_resource type="PackedScene" uid="uid://du74pr5a0rqm" path="res://prefabs/EnemySpawner.tscn" id="5_3u8vq"]
 
 [node name="GameScene" type="Node2D"]

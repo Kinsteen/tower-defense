@@ -1,15 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://1pw5tb10ntdh"]
+[gd_scene load_steps=5 format=3 uid="uid://1pw5tb10ntdh"]
 
-[ext_resource type="Texture2D" uid="uid://x2giw2kavaqu" path="res://textures/props.png" id="1_bss6j"]
 [ext_resource type="Script" path="res://prefabs/Canon.gd" id="1_by30s"]
+[ext_resource type="Texture2D" uid="uid://kacltvlq4tpk" path="res://textures/canon_base.png" id="2_dd4yw"]
+[ext_resource type="Texture2D" uid="uid://0hp6f5hwglrg" path="res://textures/canon_gun.png" id="3_efrn8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j0oe3"]
+radius = 350.0
 
 [node name="Canon" type="Node2D" groups=["building"]]
 script = ExtResource("1_by30s")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("1_bss6j")
-region_enabled = true
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_j0oe3")
+
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_dd4yw")
 region_rect = Rect2(162, 153, 28, 36)
 
+[node name="Gun" type="Sprite2D" parent="."]
+position = Vector2(4.10951e-07, -12)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("3_efrn8")
+offset = Vector2(0, 0.5)
+
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="state_changed" from="." to="." method="_on_state_changed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
