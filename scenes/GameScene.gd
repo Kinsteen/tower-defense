@@ -1,10 +1,11 @@
 extends Node2D
 
 var canon := preload("res://prefabs/Canon.tscn")
+const BUILDING_HEALTH = preload("res://scenes/BuildingHealth.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	GuiEvents.create_canon.connect(_create_canon)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -12,7 +13,13 @@ func _process(delta):
 	pass
 
 
-func _on_button_pressed():
+func _create_canon():
 	var canon_inst = canon.instantiate()
-	canon_inst.set_scale(Vector2(2, 2))
+	canon_inst.can_place = func (this):
+		for node in get_tree().get_nodes_in_group("building"):
+			if node != this and node.position == this.position:
+				return false
+		return true
+	canon_inst.position = get_global_mouse_position()
+	canon_inst.add_child(BUILDING_HEALTH.instantiate())
 	self.add_child(canon_inst)
