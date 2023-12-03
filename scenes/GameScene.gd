@@ -1,6 +1,7 @@
 extends Node2D
 
 var canon := preload("res://prefabs/Canon.tscn")
+const BUILDING_HEALTH = preload("res://scenes/BuildingHealth.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,4 +21,5 @@ func _create_canon():
 				return false
 		return true
 	canon_inst.position = get_global_mouse_position()
+	canon_inst.add_child(BUILDING_HEALTH.instantiate())
 	self.add_child(canon_inst)
