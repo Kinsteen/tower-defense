@@ -48,10 +48,11 @@ func _on_timer_timeout():
 # Is called when we just locked on target and timer is stopped,
 # or when timer times out and we're already locked on target
 func shoot():
-	if target != null:
+	if target != null and self.is_physics_processing():
 		if timer.is_stopped():
 			timer.start()
 		var bullet = BULLET.instantiate()
 		bullet.position = $Gun.position
 		bullet.rotation = $Gun.rotation
 		self.add_child(bullet)
+

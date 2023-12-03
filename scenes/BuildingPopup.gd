@@ -21,6 +21,10 @@ func _on_pickup_pressed():
 	parent.state = Building.State.MOVING
 	self.queue_free()
 
+func _on_toggle_pressed():
+	parent.set_physics_process(!parent.is_physics_processing())
+	self.queue_free()
+
 func _on_delete_pressed():
 	parent.queue_free()
 	self.queue_free()
