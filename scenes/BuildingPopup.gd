@@ -24,3 +24,10 @@ func _on_pickup_pressed():
 func _on_delete_pressed():
 	parent.queue_free()
 	self.queue_free()
+
+static func create_popup(building: Building):
+	if building.get_tree().get_nodes_in_group("building_popup").size() == 0:
+		var popup := BUILDING_POPUP.instantiate()
+		popup.parent = building
+		popup.position = building.get_global_mouse_position() - building.position
+		building.add_child(popup)

@@ -47,7 +47,7 @@ func _input(event):
 				state = State.IDLE
 		elif event.button_index == MOUSE_BUTTON_RIGHT and is_in_rect($Sprite2D, get_global_mouse_position()):
 			if state == State.IDLE:
-				create_popup()
+				BuildingPopup.create_popup(self)
 
 
 func _on_state_changed(old, new):
@@ -58,11 +58,3 @@ func _on_state_changed(old, new):
 
 func is_in_rect(sprite: Sprite2D, position: Vector2):
 	return sprite.get_rect().has_point(to_local(position) / Vector2(sprite.scale.x, sprite.scale.y))
-
-# I don't like this here but I'm not sure how to do it in a better way?
-func create_popup():
-	if get_tree().get_nodes_in_group("building_popup").size() == 0:
-		var popup := BUILDING_POPUP.instantiate()
-		popup.parent = self
-		popup.position = get_global_mouse_position() - self.position
-		self.add_child(popup)
