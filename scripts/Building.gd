@@ -52,8 +52,10 @@ func _input(event):
 
 func _on_state_changed(old, new):
 	if new == State.MOVING:
+		set_physics_process(false)
 		self.set_modulate(Color(1, 1, 1, 0.3))
 	elif new == State.IDLE:
+		set_physics_process(true)
 		self.set_modulate(Color(1, 1, 1, 1))
 
 func is_in_rect(sprite: Sprite2D, position: Vector2):

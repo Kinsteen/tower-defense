@@ -9,6 +9,7 @@ radius = 350.0
 
 [node name="Canon" type="Node2D" groups=["building"]]
 script = ExtResource("1_by30s")
+rotate_speed_deg = 60.0
 
 [node name="Area2D" type="Area2D" parent="."]
 
