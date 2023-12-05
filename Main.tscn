@@ -1,44 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://cstbxmgrc0bhe"]
+[gd_scene load_steps=5 format=3 uid="uid://cstbxmgrc0bhe"]
 
 [ext_resource type="PackedScene" uid="uid://bfoo1xws3rdfg" path="res://scenes/GameScene.tscn" id="1_nrqe5"]
-[ext_resource type="Script" path="res://scripts/GUI.gd" id="1_xyfx5"]
+[ext_resource type="Script" path="res://Main.gd" id="1_wtccw"]
+[ext_resource type="PackedScene" uid="uid://14wbidvbiea3" path="res://scenes/IngameMenu.tscn" id="3_4hcwp"]
+[ext_resource type="PackedScene" uid="uid://os1vttqaqpql" path="res://scenes/PlayMenu.tscn" id="3_uenj2"]
 
 [node name="Main" type="Node"]
+process_mode = 3
+script = ExtResource("1_wtccw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_xyfx5")
 
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
+[node name="IngameMenu" parent="CanvasLayer" instance=ExtResource("3_4hcwp")]
+
+[node name="Overlay" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 0.54902)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="Button" type="Button" parent="CanvasLayer/Control/MarginContainer/HBoxContainer"]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Canon"
+[node name="PlayMenu" parent="CanvasLayer" instance=ExtResource("3_uenj2")]
 
 [node name="GameScene" parent="." instance=ExtResource("1_nrqe5")]
+process_mode = 1
 
-[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/HBoxContainer/Button" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="play_button_pressed" from="CanvasLayer/PlayMenu" to="." method="_on_play_button_pressed"]
