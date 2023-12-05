@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfoo1xws3rdfg"]
+[gd_scene load_steps=9 format=3 uid="uid://bfoo1xws3rdfg"]
 
 [ext_resource type="Script" path="res://scenes/GameScene.gd" id="1_ka14l"]
 [ext_resource type="TileSet" uid="uid://cia0akvspfnce" path="res://tilesets/ground.tres" id="1_r86nc"]
 [ext_resource type="PackedScene" uid="uid://0svqt5yqvdk3" path="res://prefabs/Enemy.tscn" id="3_5vjwr"]
 [ext_resource type="PackedScene" uid="uid://ddo2s6nh4ew1y" path="res://prefabs/Goal.tscn" id="3_qi0w6"]
 [ext_resource type="PackedScene" uid="uid://du74pr5a0rqm" path="res://prefabs/EnemySpawner.tscn" id="5_3u8vq"]
+[ext_resource type="Resource" uid="uid://dirg0r2o3sek3" path="res://resources/Wave1.tres" id="6_7emur"]
+[ext_resource type="Resource" uid="uid://bc1ls22wtx0wi" path="res://resources/Wave2.tres" id="7_i2p75"]
+[ext_resource type="Resource" uid="uid://b6rxri0a1tsga" path="res://resources/Wave3.tres" id="8_7u1mq"]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_ka14l")
@@ -22,3 +25,4 @@ position = Vector2(507, 396)
 position = Vector2(162, 130)
 ENEMY_SCENE = ExtResource("3_5vjwr")
 GOAL = NodePath("../Goal")
+wave_datas = Array[Resource("res://resources/WaveData.gd")]([ExtResource("6_7emur"), ExtResource("7_i2p75"), ExtResource("8_7u1mq")])

@@ -5,6 +5,9 @@ extends Node
 @onready var game_scene = $GameScene as Node2D
 @onready var overlay = $CanvasLayer/Overlay
 
+# TODO maybe use a list of screens on top of each other?
+# easier pop/push
+
 func _ready():
 	Game.pause.connect(_pause)
 	Game.unpause.connect(_unpause)
@@ -21,17 +24,16 @@ func _pause():
 	ingame_menu.hide()
 	play_menu.show()
 	overlay.show()
-	game_scene.get_tree().paused = true
+	get_tree().paused = true
 
 func _unpause():
 	ingame_menu.show()
 	play_menu.hide()
 	overlay.hide()
-	game_scene.get_tree().paused = false
+	get_tree().paused = false
 
 func _on_play_button_pressed():
 	Game.unpause.emit()
 	
 	if not Game.started:
 		Game.started = true
-		Game.wave_number = 1

@@ -1,12 +1,14 @@
 extends Node2D
 
+@onready var enemy_spawner = $EnemySpawner as EnemySpawner
+
+const WAVE_1 = preload("res://resources/Wave1.tres")
 var canon := preload("res://prefabs/Canon.tscn")
 const BUILDING_HEALTH = preload("res://scenes/BuildingHealth.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GuiEvents.create_canon.connect(_create_canon)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

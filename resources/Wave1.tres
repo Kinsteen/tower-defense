@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_6x2pg")
-number_enemies = 10
+number_enemies = 5
 minimum_spawn_delay = 1.0
 maximum_spawn_delay = 5.0
