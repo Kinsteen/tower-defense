@@ -21,6 +21,7 @@ func _physics_process(delta):
 func take_damage(amount):
 	HP -= amount
 	if HP <= 0:
+		Game.enemy_defeated += 1
 		queue_free()
 
 func _on_area_2d_body_entered(body):

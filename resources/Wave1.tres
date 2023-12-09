@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=2 format=3 uid="uid://dirg0r2o3sek3"]
+
+[ext_resource type="Script" path="res://resources/WaveData.gd" id="1_6x2pg"]
+
+[resource]
+script = ExtResource("1_6x2pg")
+number_enemies = 5
+minimum_spawn_delay = 1.0
+maximum_spawn_delay = 5.0

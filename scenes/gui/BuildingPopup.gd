@@ -2,7 +2,7 @@ class_name BuildingPopup extends Control
 
 var parent: Building
 
-const BUILDING_POPUP = preload("res://scenes/BuildingPopup.tscn")
+const BUILDING_POPUP = preload("res://scenes/gui/BuildingPopup.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
