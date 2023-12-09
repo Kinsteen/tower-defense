@@ -10,9 +10,8 @@ func _ready():
 
 func _physics_process(delta):
 	if GOAL:
-		var target = GOAL.position
-		var new_position = position.move_toward(target, SPEED)
-		velocity = new_position - position
+		var target = GOAL.global_position
+		velocity = global_position.direction_to(target) * SPEED
 	else:
 		velocity.x = 0
 		velocity.y = 0
