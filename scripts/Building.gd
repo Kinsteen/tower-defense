@@ -53,7 +53,7 @@ func _input(event):
 				state = State.IDLE
 		elif event.button_index == MOUSE_BUTTON_RIGHT and is_in_rect($Base, get_global_mouse_position()):
 			if state == State.IDLE:
-				BuildingPopup.create_popup(self)
+				GuiEvents.create_building_popup.emit(self)
 
 func _on_state_changed(old, new):
 	if new == State.MOVING:

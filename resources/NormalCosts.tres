@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CostData" load_steps=2 format=3 uid="uid://4dlca67seya3"]
+
+[ext_resource type="Script" path="res://resources/CostData.gd" id="1_mkj1n"]
+
+[resource]
+script = ExtResource("1_mkj1n")
+building_costs = {
+"Canon": 100
+}
+enemy_reward = {
+"Enemy": 20
+}

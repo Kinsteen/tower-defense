@@ -22,6 +22,7 @@ func take_damage(amount):
 	HP -= amount
 	if HP <= 0:
 		Game.enemy_defeated += 1
+		Game.money += Game.NORMAL_COSTS.enemy_reward["Enemy"] # TODO find a way to get this (override get_class?)
 		queue_free()
 
 func _on_area_2d_body_entered(body):
