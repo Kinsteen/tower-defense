@@ -1,8 +1,5 @@
 extends Node2D
 
-@onready var enemy_spawner = $EnemySpawner as EnemySpawner
-
-const WAVE_1 = preload("res://resources/Wave1.tres")
 var canon := preload("res://prefabs/Canon.tscn")
 const BUILDING_HEALTH = preload("res://scenes/BuildingHealth.tscn")
 
@@ -10,9 +7,6 @@ const BUILDING_HEALTH = preload("res://scenes/BuildingHealth.tscn")
 func _ready():
 	GuiEvents.create_canon.connect(_create_canon)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func _can_place(building: Building):
 	for node in get_tree().get_nodes_in_group("building"):
