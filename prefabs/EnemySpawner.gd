@@ -2,6 +2,7 @@ class_name EnemySpawner extends Sprite2D
 
 @export var ENEMY_SCENE : PackedScene = null
 @export var GOAL : Node2D = null
+@export var TILE_MAP : TileMap = null
 @onready var timer = $Timer as Timer
 
 @export var wave_datas: Array[WaveData]
@@ -9,6 +10,7 @@ class_name EnemySpawner extends Sprite2D
 func _ready():
 	assert(ENEMY_SCENE != null)
 	assert(GOAL != null)
+	assert(TILE_MAP!= null)
 	Game.started_signal.connect(func(old, new):
 		if new:
 			timer.start(randf_range(wave_datas[Game.wave_number].minimum_spawn_delay, wave_datas[Game.wave_number].maximum_spawn_delay))
@@ -38,4 +40,9 @@ func _on_timer_timeout():
 	enemy_entity.DAMAGE = 10
 	enemy_entity.GOAL = GOAL
 	
+	# compute_path to target
+	var path_to_target = TILE_MAP.get_path_to_target(global_position, GOAL.global_position)
+	enemy_entity.PATH = path_to_target
+	
 	add_child(enemy_entity)
+	
