@@ -20,26 +20,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="BottomBar" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Button" type="Button" parent="MarginContainer/HBoxContainer"]
+[node name="CanonButton" type="Button" parent="MarginContainer/BottomBar"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Canon"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
+[node name="TopBar" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="WaveLabel" type="Label" parent="MarginContainer/HBoxContainer2"]
+[node name="WaveLabel" type="Label" parent="MarginContainer/TopBar"]
 layout_mode = 2
 text = "Wave: 1"
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="MoneyLabel" type="Label" parent="MarginContainer/TopBar"]
+layout_mode = 2
+text = "Money: 500"
+
+[connection signal="pressed" from="MarginContainer/BottomBar/CanonButton" to="." method="_on_button_pressed"]

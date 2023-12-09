@@ -1,6 +1,6 @@
 class_name BuildingPopup extends Control
 
-var parent: Building
+@export var parent: Building
 
 const BUILDING_POPUP = preload("res://scenes/gui/BuildingPopup.tscn")
 
@@ -14,8 +14,7 @@ func _unhandled_input(event):
 			self.queue_free()
 
 func has_point(point: Vector2) -> bool:
-	# Why can't I use self?
-	return Rect2($VBoxContainer.global_position, $VBoxContainer.size).has_point(point)
+	return Rect2(self.global_position, self.size).has_point(point)
 
 func _on_pickup_pressed():
 	parent.state = Building.State.MOVING
@@ -28,10 +27,3 @@ func _on_toggle_pressed():
 func _on_delete_pressed():
 	parent.queue_free()
 	self.queue_free()
-
-static func create_popup(building: Building):
-	if building.get_tree().get_nodes_in_group("building_popup").size() == 0:
-		var popup := BUILDING_POPUP.instantiate()
-		popup.parent = building
-		popup.position = building.get_global_mouse_position() - building.position
-		building.add_child(popup)
