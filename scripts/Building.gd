@@ -1,6 +1,6 @@
 class_name Building extends Node2D
 
-const BUILDING_POPUP = preload("res://scenes/BuildingPopup.tscn")
+const BUILDING_POPUP = preload("res://scenes/gui/BuildingPopup.tscn")
 
 enum State {
 	IDLE,

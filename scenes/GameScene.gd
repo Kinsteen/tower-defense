@@ -1,7 +1,7 @@
 extends Node2D
 
 var canon := preload("res://prefabs/Canon.tscn")
-const BUILDING_HEALTH = preload("res://scenes/BuildingHealth.tscn")
+const BUILDING_HEALTH = preload("res://scenes/gui/BuildingHealth.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

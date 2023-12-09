@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bfoo1xws3rdfg" path="res://scenes/GameScene.tscn" id="1_nrqe5"]
 [ext_resource type="Script" path="res://Main.gd" id="1_wtccw"]
-[ext_resource type="PackedScene" uid="uid://14wbidvbiea3" path="res://scenes/IngameMenu.tscn" id="3_4hcwp"]
-[ext_resource type="PackedScene" uid="uid://os1vttqaqpql" path="res://scenes/PlayMenu.tscn" id="3_uenj2"]
+[ext_resource type="PackedScene" uid="uid://14wbidvbiea3" path="res://scenes/gui/IngameMenu.tscn" id="3_4hcwp"]
+[ext_resource type="PackedScene" uid="uid://os1vttqaqpql" path="res://scenes/gui/PlayMenu.tscn" id="3_uenj2"]
 
 [node name="Main" type="Node"]
 process_mode = 3
@@ -12,14 +12,6 @@ script = ExtResource("1_wtccw")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="IngameMenu" parent="CanvasLayer" instance=ExtResource("3_4hcwp")]
-
-[node name="Overlay" type="ColorRect" parent="CanvasLayer"]
-modulate = Color(0, 0, 0, 0.54902)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="PlayMenu" parent="CanvasLayer" instance=ExtResource("3_uenj2")]
 

@@ -1,10 +1,17 @@
 extends Building
 
-@onready var timer = $Timer
+const BULLET = preload("res://prefabs/Bullet.tscn")
+
+@onready var timer = $Timer as Timer
 @export var GOAL: Node2D
 @export var rotate_speed_deg: float = 30
 
+# We're constantly updating 'next_target' with the closest target we have.
+# We shoot at 'target', and after we shoot, we update 'target' to 'next_target'
+# That way, we can't change target until we've taken a shot
 var target: Node2D
+var next_target: Node2D
+
 var _lock_on_target := false:
 	set(val):
 		if val && !_lock_on_target && timer.is_stopped():
@@ -12,12 +19,9 @@ var _lock_on_target := false:
 			shoot()
 		_lock_on_target = val
 
-const BULLET = preload("res://scenes/Bullet.tscn")
-
-# Custom Canon behavior
-func _ready():
-	super()
-
+func _process(delta):
+	$BuildingHealth/ProgressBar.value = timer.time_left * 100
+	$BuildingHealth/ProgressBar.max_value = timer.wait_time * 100
 
 func _physics_process(delta):
 	var closer_body: Node2D = null
@@ -31,20 +35,22 @@ func _physics_process(delta):
 				closer_body = body
 				_dist = d
 	
-	target = closer_body
+	next_target = closer_body
+	
+	if target == null and next_target != null and timer.is_stopped():
+		target = next_target
 
 	if target != null:
 		var angle_left = $Gun.get_angle_to(target.global_position) # Why global?
 		var max_speed = deg_to_rad(rotate_speed_deg) * delta
 		angle_left = clampf(angle_left, -max_speed, max_speed)
 		$Gun.rotate(angle_left)
-		_lock_on_target = abs(angle_left) < deg_to_rad(rotate_speed_deg) * delta
-	else:
-		timer.stop()
+		_lock_on_target = abs(angle_left) < max_speed
 
 func _on_timer_timeout():
 	if _lock_on_target:
 		shoot()
+	target = next_target
 
 # Is called when we just locked on target and timer is stopped,
 # or when timer times out and we're already locked on target
