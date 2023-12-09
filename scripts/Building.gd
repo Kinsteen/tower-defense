@@ -29,6 +29,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if state == State.MOVING:
+		self.set_modulate(Color(1, 1, 1, 0.3))
+	elif state == State.IDLE:
+		self.set_modulate(Color(1, 1, 1, 1))
+	
 	if can_place != null:
 		if not can_place.call(self):
 			self.set_modulate(Color(1, .5, .5, 0.8))
@@ -53,10 +58,8 @@ func _input(event):
 func _on_state_changed(old, new):
 	if new == State.MOVING:
 		set_physics_process(false)
-		self.set_modulate(Color(1, 1, 1, 0.3))
 	elif new == State.IDLE:
 		set_physics_process(true)
-		self.set_modulate(Color(1, 1, 1, 1))
 
 func is_in_rect(sprite: Sprite2D, position: Vector2):
 	return sprite.get_rect().has_point(to_local(position) / Vector2(sprite.scale.x, sprite.scale.y))
