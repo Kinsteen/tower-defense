@@ -10,6 +10,7 @@ radius = 24.0208
 size = Vector2(22, 35)
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_mask = 0
 script = ExtResource("1_70tlf")
 
 [node name="Area2D" type="Area2D" parent="."]
