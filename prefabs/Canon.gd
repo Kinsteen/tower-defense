@@ -41,6 +41,8 @@ func _physics_process(delta):
 		target = next_target
 
 	if target != null:
+		if timer.is_stopped():
+			timer.start()
 		var angle_left = $Gun.get_angle_to(target.global_position) # Why global?
 		var max_speed = deg_to_rad(rotate_speed_deg) * delta
 		angle_left = clampf(angle_left, -max_speed, max_speed)
