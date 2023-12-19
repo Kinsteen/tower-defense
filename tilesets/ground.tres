@@ -1,6 +1,7 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cia0akvspfnce"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cia0akvspfnce"]
 
 [ext_resource type="Texture2D" uid="uid://daxwei1medljw" path="res://textures/grass.png" id="1_s2iww"]
+[ext_resource type="Texture2D" uid="uid://cj4cntd3kyfmo" path="res://textures/TileSelect.png" id="2_xw3mm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ae7yb"]
 texture = ExtResource("1_s2iww")
@@ -332,7 +333,12 @@ texture = ExtResource("1_s2iww")
 10:10/0/custom_data_0 = true
 15:15/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ko12s"]
+texture = ExtResource("2_xw3mm")
+0:0/0 = 0
+
 [resource]
 custom_data_layer_0/name = "can_walk"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_ae7yb")
+sources/1 = SubResource("TileSetAtlasSource_ko12s")
